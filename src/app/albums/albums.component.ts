@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IAlbumDetails } from '../interfaces'
+import { ITunesService } from '../itunes/itunes.service';
 
 @Component({
   selector: 'app-albums',
@@ -9,18 +10,19 @@ import { IAlbumDetails } from '../interfaces'
 })
 export class AlbumsComponent implements OnInit {
 
-  albumDetails: IAlbumDetails
-  constructor() {
+  albumDetails!: IAlbumDetails;
+  constructor(private iTunesService : ITunesService) {
     //Dummy data
     this.albumDetails = {
       artist: 'Artist name',
-      name: 'Album name',
+      title: 'Album name',
       image: 'assets/img/testImg.jpg'
     } as IAlbumDetails
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.iTunesService.getITunesData().subscribe((data) => this.albumDetails = data)
   }
 
 }

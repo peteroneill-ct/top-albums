@@ -1,5 +1,5 @@
 export interface IAlbumDetails {
-  name: string
+  title: string
   artist: string
   image: string
 }
