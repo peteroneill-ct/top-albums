@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+    <div>
+      <mat-toolbar color="primary"> Top 100 Albums </mat-toolbar>
+      <app-albums></app-albums>
+    </div>
+  `,
 })
-export class AppComponent {
-
-}
+export class AppComponent {}

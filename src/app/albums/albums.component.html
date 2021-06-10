@@ -1,7 +1,17 @@
-<div *ngIf = "albumDetails">
-  <span>{{albumDetails.title}}, {{albumDetails.artist}}</span>
+<div fxLayout="row">
+  <div fxFlex></div>
+
+    <mat-card fxFlex="300px" *ngIf="albumDetails">
+      <mat-card-title>{{albumDetails.artist}}</mat-card-title>
+      <mat-card-header>
+          <div>{{albumDetails.title}}</div>
+      </mat-card-header>
+
+      <mat-card-content fxLayoutAlign="center">
+        <img [src]='albumDetails.image'>
+      </mat-card-content>
+    </mat-card>
+    <h2 *ngIf="!albumDetails">There is nothing to display</h2>
+
+  <div fxFlex></div>
 </div>
-<div *ngIf = "albumDetails">
-  <img [src] = 'albumDetails.image'>
-</div>
-<h2 *ngIf = "!albumDetails">There is nothing to display</h2>
