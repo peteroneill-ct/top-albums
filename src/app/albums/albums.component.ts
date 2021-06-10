@@ -1,7 +1,7 @@
 import { newArray } from '@angular/compiler/src/util'
 import { Component, OnInit } from '@angular/core'
 
-import { IAlbumDetails, IAlbumsDetails } from '../interfaces'
+import { IAlbumDetails } from '../interfaces'
 import { ITunesService } from '../itunes/itunes.service'
 
 @Component({
@@ -11,7 +11,7 @@ import { ITunesService } from '../itunes/itunes.service'
 })
 export class AlbumsComponent implements OnInit {
   albumsDetails!: IAlbumDetails[]
-
+  searchTerm!: string
   constructor(private iTunesService: ITunesService) {}
 
   ngOnInit() {

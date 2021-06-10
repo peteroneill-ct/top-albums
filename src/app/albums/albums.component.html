@@ -1,10 +1,13 @@
-<div *ngIf="albumsDetails" fxLayout="column">
+<div fxLayout="column" class="form-group">
+  <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchTerm">
+</div>
 
-  <div *ngFor="let album of albumsDetails; let i = index">
+<div *ngIf="albumsDetails" fxLayout="column">
+  <div *ngFor="let album of albumsDetails | filter:searchTerm; let i = index">
     <div>
       <div fxFlex></div>
 
-      <mat-card matRipple fxFlex="300px" *ngIf="album">
+      <mat-card matRipple matTooltip="Category: {{album.category}} - Price: {{album.price}}" fxFlex="300px" *ngIf="album">
 
         <mat-card-title>{{i+1}} - {{album.artist}}</mat-card-title>
 

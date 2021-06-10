@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { IAlbumDetails, IAlbumsDetails } from '../interfaces'
+import { IAlbumDetails } from '../interfaces'
 
 interface IiTunesAlbumsData {
   feed: { entry: [IiTunesAlbumData] }
@@ -21,6 +21,14 @@ interface IiTunesAlbumData {
   'im:artist': {
     label: string
   }
+  category: {
+    attributes: {
+      label: string
+    }
+  }
+  'im:price': {
+    label: string
+  }
 }
 
 @Injectable({
@@ -30,16 +38,6 @@ export class ITunesService {
   url = `https://itunes.apple.com/us/rss/topalbums/limit=100/json`
 
   constructor(private httpClient: HttpClient) {}
-
-  private transformToIAlbumDetails(data: IiTunesAlbumsData): IAlbumDetails {
-    var dfe = data.feed.entry[0]
-    var imgCount = dfe['im:image'].length
-    return {
-      title: dfe['im:name'].label,
-      artist: dfe['im:artist'].label,
-      image: dfe['im:image'][imgCount - 1].label,
-    }
-  }
 
   private transformToIAlbumsDetails(data: IiTunesAlbumsData): IAlbumDetails[] {
     var dfe = data.feed.entry
@@ -51,8 +49,10 @@ export class ITunesService {
       var title = e['im:name'].label
       var artist = e['im:artist'].label
       var image = e['im:image'][imgCount - 1].label
+      var category = e.category.attributes.label
+      var price = e['im:price'].label
 
-      var albumDetails = { title, artist, image }
+      var albumDetails = { title, artist, image, category, price }
       albumsDetails.push(albumDetails)
     })
 
