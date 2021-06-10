@@ -13,7 +13,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: top-albums
   AZURE_WEBAPP_PACKAGE_PATH: './dist/top-albums'
-  NODE_VERSION: '10.x'
+  NODE_VERSION: '14.x'
 
 jobs:
   build-and-deploy:
