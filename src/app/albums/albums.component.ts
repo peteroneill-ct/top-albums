@@ -1,6 +1,7 @@
+import { newArray } from '@angular/compiler/src/util'
 import { Component, OnInit } from '@angular/core'
 
-import { IAlbumDetails } from '../interfaces'
+import { IAlbumDetails, IAlbumsDetails } from '../interfaces'
 import { ITunesService } from '../itunes/itunes.service'
 
 @Component({
@@ -9,17 +10,11 @@ import { ITunesService } from '../itunes/itunes.service'
   styleUrls: ['./albums.component.css'],
 })
 export class AlbumsComponent implements OnInit {
-  albumDetails!: IAlbumDetails
-  constructor(private iTunesService: ITunesService) {
-    //Dummy data
-    this.albumDetails = {
-      artist: 'Artist name',
-      title: 'Album name',
-      image: 'assets/img/testImg.jpg',
-    } as IAlbumDetails
-  }
+  albumsDetails!: IAlbumDetails[]
+
+  constructor(private iTunesService: ITunesService) {}
 
   ngOnInit() {
-    this.iTunesService.getITunesData().subscribe((data) => (this.albumDetails = data))
+    this.iTunesService.getITunesData().subscribe((data) => (this.albumsDetails = data))
   }
 }

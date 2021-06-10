@@ -40,12 +40,30 @@ export class ITunesService {
       image: dfe['im:image'][imgCount - 1].label,
     }
   }
-  getITunesData(): Observable<IAlbumDetails> {
+
+  private transformToIAlbumsDetails(data: IiTunesAlbumsData): IAlbumDetails[] {
+    var dfe = data.feed.entry
+    var albumsDetails = Array<IAlbumDetails>()
+
+    dfe.forEach((e) => {
+      var imgCount = e['im:image'].length
+
+      var title = e['im:name'].label
+      var artist = e['im:artist'].label
+      var image = e['im:image'][imgCount - 1].label
+
+      var albumDetails = { title, artist, image }
+      albumsDetails.push(albumDetails)
+    })
+
+    return albumsDetails
+  }
+  getITunesData(): Observable<IAlbumDetails[]> {
     var iTunesData = this.httpClient.get<IiTunesAlbumsData>(this.url)
     iTunesData.toPromise().then((data) => {
       console.log(data)
     })
-    var mappedData = iTunesData.pipe(map((data) => this.transformToIAlbumDetails(data)))
+    var mappedData = iTunesData.pipe(map((data) => this.transformToIAlbumsDetails(data)))
 
     return mappedData
   }

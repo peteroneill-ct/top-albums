@@ -1,17 +1,17 @@
 <div fxLayout="row">
   <div fxFlex></div>
-
-    <mat-card fxFlex="300px" *ngIf="albumDetails">
-      <mat-card-title>{{albumDetails.artist}}</mat-card-title>
+  <div *ngFor="let album of albumsDetails">
+    <mat-card fxFlex="300px" *ngIf="album">
+      <mat-card-title>{{album.artist}}</mat-card-title>
       <mat-card-header>
-          <div>{{albumDetails.title}}</div>
+        <div>{{album.title}}</div>
       </mat-card-header>
 
       <mat-card-content fxLayoutAlign="center">
-        <img [src]='albumDetails.image'>
+        <img [src]='album.image'>
       </mat-card-content>
     </mat-card>
-    <h2 *ngIf="!albumDetails">There is nothing to display</h2>
-
+    <h2 *ngIf="!albumsDetails">There is nothing to display</h2>
+  </div>
   <div fxFlex></div>
 </div>
