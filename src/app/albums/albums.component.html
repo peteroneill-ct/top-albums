@@ -1,17 +1,26 @@
-<div fxLayout="row">
-  <div fxFlex></div>
-  <div *ngFor="let album of albumsDetails">
-    <mat-card fxFlex="300px" *ngIf="album">
-      <mat-card-title>{{album.artist}}</mat-card-title>
-      <mat-card-header>
-        <div>{{album.title}}</div>
-      </mat-card-header>
+<div *ngIf="albumsDetails" fxLayout="column">
 
-      <mat-card-content fxLayoutAlign="center">
-        <img [src]='album.image'>
-      </mat-card-content>
-    </mat-card>
-    <h2 *ngIf="!albumsDetails">There is nothing to display</h2>
+  <div *ngFor="let album of albumsDetails; let i = index">
+    <div>
+      <div fxFlex></div>
+
+      <mat-card fxFlex="300px" *ngIf="album">
+
+        <mat-card-title>{{i+1}} - {{album.artist}}</mat-card-title>
+
+        <mat-card-header>
+          <div>{{album.title}}</div>
+        </mat-card-header>
+
+        <mat-card-content fxLayoutAlign="center">
+          <img [src]='album.image'>
+        </mat-card-content>
+
+      </mat-card>
+
+      <div fxFlex></div>
+    </div>
   </div>
-  <div fxFlex></div>
+
 </div>
+<h2 *ngIf="!albumsDetails">There is nothing to display</h2>
